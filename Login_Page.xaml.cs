@@ -27,9 +27,20 @@ namespace WPFModernVerticalMenu
 
         private void btnlogin_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow m1 = new MainWindow();
-            this.Hide();
-            m1.Show();
+
+
+            if (txtusername.Text == ("viraj") && txtpassword.Password ==("123Viraj"))
+            {
+                MessageBox.Show("Login successful!");
+                MainWindow m1 = new MainWindow();
+                m1.Show();
+                this.Close();
+            }
+            else
+            {
+                
+                MessageBox.Show("Invalid username or password.");
+            }
         }
 
         private void btnexit_Click(object sender, RoutedEventArgs e)
