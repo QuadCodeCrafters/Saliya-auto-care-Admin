@@ -27,7 +27,7 @@ namespace WPFModernVerticalMenu
 
         private void btnlogin_Click(object sender, RoutedEventArgs e)
         {
-            //add password and username
+            //add password and username for database 
             MainWindow m1 = new MainWindow();
             this.Hide();
             m1.Show();
