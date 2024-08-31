@@ -1,4 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,20 +27,9 @@ namespace WPFModernVerticalMenu
 
         private void btnlogin_Click(object sender, RoutedEventArgs e)
         {
-
-
-            if (txtusername.Text == ("viraj") && txtpassword.Password ==("123Viraj"))
-            {
-                MessageBox.Show("Login successful!");
-                MainWindow m1 = new MainWindow();
-                m1.Show();
-                this.Close();
-            }
-            else
-            {
-                
-                MessageBox.Show("Invalid username or password.");
-            }
+            MainWindow m1 = new MainWindow();
+            this.Hide();
+            m1.Show();
         }
 
         private void btnexit_Click(object sender, RoutedEventArgs e)
