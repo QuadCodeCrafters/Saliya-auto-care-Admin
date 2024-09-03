@@ -11,6 +11,7 @@
         Background="{x:Null}"
         AllowsTransparency="True"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+    
 
     <materialDesign:Card UniformCornerRadius="15" 
                          Background="{DynamicResource MaterialDesignPaper}"
