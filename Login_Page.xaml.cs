@@ -99,14 +99,14 @@ namespace WPFModernVerticalMenu
         protected override void OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
-            PlayClickSound();
+          
         }
 
        
         protected override void OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs e)
         {
             base.OnMouseRightButtonDown(e);
-            PlayClickSound();
+            
         }
 
        
@@ -115,14 +115,14 @@ namespace WPFModernVerticalMenu
             base.OnMouseDown(e);
             if (e.ChangedButton == System.Windows.Input.MouseButton.Middle)
             {
-                PlayClickSound();
+                
             }
         }
 
          
         private void PlayClickSound()
         {
-            SystemSounds.Beep.Play();
+             
         }
     }
 }
