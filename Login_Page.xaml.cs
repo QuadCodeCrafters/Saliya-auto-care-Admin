@@ -1,23 +1,12 @@
 using MaterialDesignThemes.Wpf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using WPFModernVerticalMenu.Pages;
 
 namespace WPFModernVerticalMenu
 {
-    /// <summary>
-    /// Interaction logic for Login_Page.xaml
-    /// </summary>
     public partial class Login_Page : Window
     {
         public Login_Page()
@@ -27,35 +16,113 @@ namespace WPFModernVerticalMenu
 
         private void btnlogin_Click(object sender, RoutedEventArgs e)
         {
-            //add password and username for database 
-            MainWindow m1 = new MainWindow();
-            this.Hide();
-            m1.Show();
+            // Add password and username for database 
         }
 
-        private void btnexit_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
         public bool IsDarkTheme { get; set; }
         private readonly PaletteHelper paletteHelper = new PaletteHelper();
+
         private void themetoggle_Click(object sender, RoutedEventArgs e)
         {
-            ITheme theme = paletteHelper.GetTheme();
-
-            if (IsDarkTheme = theme.GetBaseTheme() == BaseTheme.Dark)
+            try
             {
-                IsDarkTheme = false;
-                theme.SetBaseTheme(Theme.Light);
-            }
+                ITheme theme = paletteHelper.GetTheme();
 
-            else
+                if (IsDarkTheme = theme.GetBaseTheme() == BaseTheme.Dark)
+                {
+                    IsDarkTheme = false;
+                    theme.SetBaseTheme(Theme.Light);
+                }
+                else
+                {
+                    IsDarkTheme = true;
+                    theme.SetBaseTheme(Theme.Dark);
+                }
+
+                paletteHelper.SetTheme(theme);
+            }
+            catch (Exception obj)
             {
-                IsDarkTheme = true;
-                theme.SetBaseTheme(Theme.Dark);
+                MessageBox.Show(obj.Message.ToString());
             }
+        }
 
-            paletteHelper.SetTheme(theme);
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            
+            DisableLoginPageElements();
+
+             
+            loginhelp loginhelp = new loginhelp();
+
+            
+            loginhelp.Closed += Loginhelp_Closed;
+
+            loginhelp.Show();
+        }
+
+        private void Loginhelp_Closed(object sender, EventArgs e)
+        {
+ 
+            EnableLoginPageElements();
+        }
+
+        private void DisableLoginPageElements()
+        {
+            txtusername.IsEnabled = false;
+            txtpassword.IsEnabled = false;
+            btnlogin.IsEnabled = false;
+            DialogHost1.IsEnabled = false;
+        }
+
+        private void EnableLoginPageElements()
+        {
+            txtusername.IsEnabled = true;
+            txtpassword.IsEnabled = true;
+            btnlogin.IsEnabled = true;
+            DialogHost1.IsEnabled = true;
+        }
+
+       
+        protected override void OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+            PlayClickSound();
+        }
+
+       
+        protected override void OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs e)
+        {
+            base.OnMouseRightButtonDown(e);
+            PlayClickSound();
+        }
+
+       
+        protected override void OnMouseDown(System.Windows.Input.MouseButtonEventArgs e)
+        {
+            base.OnMouseDown(e);
+            if (e.ChangedButton == System.Windows.Input.MouseButton.Middle)
+            {
+                PlayClickSound();
+            }
+        }
+
+         
+        private void PlayClickSound()
+        {
+            SystemSounds.Beep.Play();
         }
     }
 }
