@@ -80,6 +80,7 @@
                             <StackPanel>
                                 <materialDesign:PopupBox HorizontalAlignment="Right" Margin="0 20 20 0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Height="25">
                                     <StackPanel>
+                                        
                                         <StackPanel Margin="16 10 0 6" Orientation="Horizontal" HorizontalAlignment="Center">
                                             <TextBlock VerticalAlignment="Center" Text="Dark Mode" ToolTip="Enable Dark Mode" Cursor="Hand"/>
                                             <ToggleButton Cursor="Hand" Margin="10 0 8 0" Name="themetoggle" IsChecked="{Binding IsDarkTheme}" Click="themetoggle_Click"/>
