@@ -27,7 +27,7 @@
 
                 <WrapPanel>
                     <Image Source="Images/logo.png" HorizontalAlignment="Left" Width="50" Height="50"></Image>
-                    <TextBlock Text="Saliya Auto Care" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5">
+                    <TextBlock Text="QuadCodeCrafters" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5">
                         <TextBlock.Foreground>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                                 <GradientStop Color="#4169E1" Offset="0.0"/>
