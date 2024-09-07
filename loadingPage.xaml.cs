@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -13,6 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
+using MySql.Data.MySqlClient;
 
 namespace WPFModernVerticalMenu
 {
@@ -21,10 +24,13 @@ namespace WPFModernVerticalMenu
     /// </summary>
     public partial class loadingPage : Window
     {
+        DataBaseConnection d1 = new DataBaseConnection();
         public loadingPage()
         {
             InitializeComponent();
+            d1.dDbConnect();
         }
+        
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             BackgroundWorker bk = new BackgroundWorker();
@@ -50,7 +56,7 @@ namespace WPFModernVerticalMenu
             ProgressBar.Value = e.ProgressPercentage;
             if (ProgressBar.Value == 80)
             {
-                Login_Page lP = new Login_Page();
+                Login_Page lP = new Login_Page(d1);
                 lP.Show();
                 this.Close();
             }
