@@ -1,13 +1,22 @@
 using MaterialDesignThemes.Wpf;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
-using System.Windows.Threading;
+using System.Windows.Media.Animation;
+using System.Data.SqlClient;
 using WPFModernVerticalMenu.Pages;
-using System.Threading;
 
 namespace WPFModernVerticalMenu
 {
@@ -22,114 +31,55 @@ namespace WPFModernVerticalMenu
 
         private void btnlogin_Click(object sender, RoutedEventArgs e)
         {
+            if (txtusername.Text == "" || txtpassword.Password == "")
+            {
                 if (txtusername.Text == "")
                 {
-                    ShowUsernameErrorAnimation();
+                    accError.Text = "Please fill the user name";
                 }
-
                 if (txtpassword.Password == "")
                 {
-                    ShowpasswordErrorAnimation();
+                    accError.Text = "Please fill the password";
                 }
-            
+                if (txtusername.Text == "" && txtpassword.Password == "")
+                {
+                    accError.Text = "Please fill user name and the password";
+                }
+
+            }
             else
             {
-                
-                string usName = txtusername.Text, pass = txtpassword.Password;
-                d1.con.Open();
-                string query = "SELECT UserName,password FROM useraccounts WHERE UserName = @v1 AND password = @v2";
-                MySqlCommand cmd = new MySqlCommand(query, d1.con);
-                cmd.Parameters.AddWithValue("@v1", usName);
-                cmd.Parameters.AddWithValue("@v2", pass);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                string us = "";
-                string pas = "";
-                while (reader.Read())
-                {
-                    us = reader.GetString("UserName");
-                    pas = reader.GetString("password");
-                }
-                d1.con.Close();
+                try {
 
-                if (us != "" && pas != "")
-                {
-                    MainWindow m1 = new MainWindow();
-                    this.Hide();
-                    m1.Show();
-                }
-                else
-                {
-                    Thread errorThread = new Thread(() =>
+                    string usName = txtusername.Text, pass = txtpassword.Password;
+                    d1.con.Open();
+                    string query = "SELECT UserName,password FROM useraccounts WHERE UserName = @v1 AND password = @v2";
+                    MySqlCommand cmd = new MySqlCommand(query, d1.con);
+                    cmd.Parameters.AddWithValue("@v1", usName);
+                    cmd.Parameters.AddWithValue("@v2", pass);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    string us = "";
+                    string pas = "";
+                    while (reader.Read())
                     {
-                        Dispatcher.Invoke(() => accError.Text = "Incorrect Username or Password");
+                        us = reader.GetString("UserName");
+                        pas = reader.GetString("password");
+                    }
+                    if (us != "" && pas != "")
+                    {
+                        MainWindow m1 = new MainWindow();
+                        this.Hide();
+                        m1.Show();
+                    }
+                    else
+                    {
+                        accError.Text = "Incorrect user name or password";
+                    }
+                    d1.con.Close();
 
-                        Thread.Sleep(4000);
-
-                        Dispatcher.Invoke(() => accError.Text = string.Empty);
-                    });
-                    errorThread.Start();
-                    ShowUsernameErrorAnimation();
-                    ShowpasswordErrorAnimation();
                 }
+                catch(Exception ex) { MessageBox.Show( ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
             }
-        }
-
-         
-        private void ShowUsernameErrorAnimation()
-        {
-            // Set the TextBox border to red
-            txtusername.BorderBrush = Brushes.Red;
-
-            // Create the shake animation
-            TranslateTransform translateTransform = new TranslateTransform();
-            txtusername.RenderTransform = translateTransform;
-
-            DoubleAnimation animation = new DoubleAnimation
-            {
-                From = 0,
-                To = 10,
-                Duration = TimeSpan.FromMilliseconds(50),
-                AutoReverse = true,
-                RepeatBehavior = new RepeatBehavior(5) // Shake 5 times
-            };
-
-            translateTransform.BeginAnimation(TranslateTransform.XProperty, animation);
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(2);
-            timer.Tick += (s, e) =>
-            {
-                txtusername.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#FFDDDDDD");
-                timer.Stop();
-            };
-            timer.Start();
-        }
-        private void ShowpasswordErrorAnimation()
-        {
-            // Set the TextBox border to red
-            txtpassword.BorderBrush = Brushes.Red;
-
-            // Create the shake animation
-            TranslateTransform translateTransform = new TranslateTransform();
-            txtpassword.RenderTransform = translateTransform;
-
-            DoubleAnimation animation = new DoubleAnimation
-            {
-                From = 0,
-                To = 10,
-                Duration = TimeSpan.FromMilliseconds(50),
-                AutoReverse = true,
-                RepeatBehavior = new RepeatBehavior(5) // Shake 5 times
-            };
-
-            translateTransform.BeginAnimation(TranslateTransform.XProperty, animation);
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(2);
-            timer.Tick += (s, e) =>
-            {
-                txtpassword.BorderBrush = (Brush)new BrushConverter().ConvertFromString("#FFDDDDDD");
-                timer.Stop();
-            };
-            timer.Start();
         }
 
         public bool IsDarkTheme { get; set; }
@@ -174,14 +124,21 @@ namespace WPFModernVerticalMenu
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            
             DisableLoginPageElements();
-            loginhelp helpWindow = new loginhelp(); 
-            helpWindow.Closed += Loginhelp_Closed;
-            helpWindow.Show();
+
+             
+            loginhelp loginhelp = new loginhelp();
+
+            
+            loginhelp.Closed += Loginhelp_Closed;
+
+            loginhelp.Show();
         }
 
         private void Loginhelp_Closed(object sender, EventArgs e)
         {
+ 
             EnableLoginPageElements();
         }
 
@@ -201,28 +158,34 @@ namespace WPFModernVerticalMenu
             DialogHost1.IsEnabled = true;
         }
 
+       
         protected override void OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
+          
         }
 
+       
         protected override void OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs e)
         {
             base.OnMouseRightButtonDown(e);
+            
         }
 
+       
         protected override void OnMouseDown(System.Windows.Input.MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
             if (e.ChangedButton == System.Windows.Input.MouseButton.Middle)
             {
-               
+                
             }
         }
 
+         
         private void PlayClickSound()
         {
-            // Add code to play a sound on click
+             
         }
     }
 }
