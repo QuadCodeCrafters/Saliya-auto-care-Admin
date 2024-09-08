@@ -10,7 +10,7 @@
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True"
         ResizeMode="NoResize" FontFamily="Poppins">
-   
+
     <!-- By Jeyderht 
         Subscribe: https://www.youtube.com/channel/UC9di50E_9m9pQcZPxzFqYUA/about
     video is here 
@@ -152,10 +152,10 @@
                 </StackPanel>
                 <!-- End: Button Close | Restore | Minimize -->
 
-                <Frame Grid.Row="4"
+                <Frame Grid.Row="2"
                        Name="fContainer"
-                       Margin="10,10,20,10"
-                       NavigationUIVisibility="Hidden" Grid.RowSpan="2">
+                       Margin="10,10,10,10"
+                       NavigationUIVisibility="Hidden" Grid.RowSpan="4">
 
                 </Frame>
 
