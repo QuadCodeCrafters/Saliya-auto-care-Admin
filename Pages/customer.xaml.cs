@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace WPFModernVerticalMenu.Pages
 {
     /// <summary>
-    /// Lógica de interacción para Dashboard.xaml
+    /// Interaction logic for customer.xaml
     /// </summary>
-    public partial class Dashboard : Page
+    public partial class customer : Page
     {
-        public Dashboard()
+        public customer()
         {
             InitializeComponent();
+        }
+
+        private void InitializeComponent()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -26,7 +26,9 @@ namespace WPFModernVerticalMenu
         {
             InitializeComponent();
             this.WindowState = WindowState.Maximized;
-           
+            fContainer.Navigate(new System.Uri("Pages/Home.xaml", UriKind.RelativeOrAbsolute));
+
+
         }
 
         private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -216,7 +218,7 @@ namespace WPFModernVerticalMenu
 
         private void btnDashboard_Click(object sender, RoutedEventArgs e)
         {
-            fContainer.Navigate(new System.Uri("Pages/Dashboard.xaml", UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(new System.Uri("Pages/customer.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void MenuItem_Loaded(object sender, RoutedEventArgs e)
@@ -237,6 +239,38 @@ namespace WPFModernVerticalMenu
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             fContainer.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnCustomerReg_Click(object sender, RoutedEventArgs e)
+        {
+            fContainer.Navigate(new System.Uri("Pages/customer.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void btnCustomerReg_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (Tg_Btn.IsChecked == false)
+            {
+                Popup.PlacementTarget = btnCustomerReg;
+                Popup.Placement = PlacementMode.Right;
+                Popup.IsOpen = true;
+                Header.PopupText.Text = "Customer";
+            }
+        }
+
+        private void btnCustomerReg_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Popup.Visibility = Visibility.Collapsed;
+            Popup.IsOpen = false;
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void fContainer_Navigated(object sender, NavigationEventArgs e)
+        {
+
         }
     }
 }

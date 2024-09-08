@@ -9,6 +9,9 @@
                 
                 <ResourceDictionary Source="Themes/DarkTheme.xaml"/>
                 <ResourceDictionary Source="Themes/searchboxTheme.xaml"/>
+                <ResourceDictionary Source="Themes/TextBoxThemeNormal.xaml"/>
+                <ResourceDictionary Source="Themes/comboBoxTheme.xaml"/>
+
 
                 <ResourceDictionary Source="Assets/Icons.xaml"/>
 
