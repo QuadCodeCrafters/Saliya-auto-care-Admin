@@ -63,7 +63,7 @@ namespace WPFModernVerticalMenu
                     {
                         Dispatcher.Invoke(() => accError.Text = "Incorrect Username or Password");
 
-                        Thread.Sleep(2000);
+                        Thread.Sleep(4000);
 
                         Dispatcher.Invoke(() => accError.Text = string.Empty);
                     });
