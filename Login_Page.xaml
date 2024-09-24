@@ -11,7 +11,14 @@
         Background="{x:Null}"
         AllowsTransparency="True"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}">
-
+    <Window.Resources>
+        <!-- Animation for shake -->
+        <Storyboard x:Key="ShakeAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                         From="0" To="-5" Duration="0:0:0.1" AutoReverse="True" RepeatBehavior="3x"/>
+        </Storyboard>
+    </Window.Resources>
+    
     <materialDesign:Card UniformCornerRadius="15" 
                          Background="{DynamicResource MaterialDesignPaper}"
                          Margin="25" materialDesign:ShadowAssist.ShadowDepth="Depth4" >
@@ -45,7 +52,7 @@
                             <ColumnDefinition Width="400*"/>
                         </Grid.ColumnDefinitions>
 
-            
+
                         <materialDesign:DialogHost CloseOnClickAway="True" x:Name="DialogHost" Grid.Column="0">
                             <StackPanel>
                                 <WrapPanel Margin="10">
@@ -67,9 +74,30 @@
                                     </Border.Effect>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" Width="280" Height="348">
                                         <TextBlock Margin="0 10 0 5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="28" FontWeight="Bold" Text="Log in" Foreground="{DynamicResource MaterialDesignBody}"/>
-                                        <TextBox Margin="0 50 0 0" x:Name="txtusername" Width="200" Height="55" FontSize="15" materialDesign:HintAssist.Hint="Enter Username" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                                        <PasswordBox Margin="0 20 0 0" x:Name="txtpassword" Width="200" Height="55" FontSize="15" materialDesign:HintAssist.Hint="Enter Password" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedPasswordBox}"/>
-                                        <Button Margin="0 20 0 0" x:Name="btnlogin" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="35" Width="100" materialDesign:ButtonAssist.CornerRadius="10" FontSize="12" Content="LOG IN" Click="btnlogin_Click"/>
+                                        <TextBox Margin="0 50 0 0" 
+                                                 x:Name="txtusername" 
+                                                 Width="200" 
+                                                 Height="55" 
+                                                 FontSize="15" 
+                                                 materialDesign:HintAssist.Hint="Enter Username" 
+                                                 BorderThickness="2" 
+                                                 BorderBrush="{DynamicResource MaterialDesignDivider}" 
+                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}">
+                                            <TextBox.Triggers>
+                                                <EventTrigger RoutedEvent="TextBox.GotFocus">
+                                                    <BeginStoryboard Storyboard="{StaticResource ShakeAnimation}"/>
+                                                </EventTrigger>
+                                            </TextBox.Triggers>
+                                        </TextBox>
+                                        <PasswordBox Margin="0 20 0 0" x:Name="txtpassword" Width="200" Height="55" FontSize="15" materialDesign:HintAssist.Hint="Enter Password" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedPasswordBox}">
+                                            <PasswordBox.Triggers>
+                                                <EventTrigger RoutedEvent="PasswordBox.GotFocus">
+                                                    <BeginStoryboard Storyboard="{StaticResource ShakeAnimation}"/>
+                                                </EventTrigger>
+                                            </PasswordBox.Triggers>
+                                        </PasswordBox>
+
+                                            <Button Margin="0 20 0 0" x:Name="btnlogin" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFlatMidBgButton}" materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="35" Width="100" materialDesign:ButtonAssist.CornerRadius="10" FontSize="12" Content="LOG IN" Click="btnlogin_Click"/>
                                         <StackPanel Height="58" Margin="0 10 0 0">
                                             <TextBlock x:Name="accError" TextWrapping="Wrap" Text="" Width="260" Height="27" TextAlignment="Center" Foreground="Red"/>
                                         </StackPanel>
@@ -77,8 +105,6 @@
                                 </Border>
                             </StackPanel>
                         </materialDesign:DialogHost>
-
- 
                         <materialDesign:DialogHost CloseOnClickAway="True" x:Name="DialogHost1" Grid.Column="1">
                             <StackPanel>
                                 <materialDesign:PopupBox HorizontalAlignment="Right" Margin="0 20 20 0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Height="25">

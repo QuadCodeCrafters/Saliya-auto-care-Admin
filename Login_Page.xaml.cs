@@ -49,32 +49,36 @@ namespace WPFModernVerticalMenu
             }
             else
             {
-                //add password and username for database
-                string usName = txtusername.Text, pass = txtpassword.Password;
-                d1.con.Open();
-                string query = "SELECT UserName,password FROM useraccounts WHERE UserName = @v1 AND password = @v2";
-                MySqlCommand cmd = new MySqlCommand(query, d1.con);
-                cmd.Parameters.AddWithValue("@v1", usName);
-                cmd.Parameters.AddWithValue("@v2", pass);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                string us = "";
-                string pas = "";
-                while (reader.Read())
-                {
-                    us = reader.GetString("UserName");
-                    pas = reader.GetString("password");
+                try {
+
+                    string usName = txtusername.Text, pass = txtpassword.Password;
+                    d1.con.Open();
+                    string query = "SELECT UserName,password FROM useraccounts WHERE UserName = @v1 AND password = @v2";
+                    MySqlCommand cmd = new MySqlCommand(query, d1.con);
+                    cmd.Parameters.AddWithValue("@v1", usName);
+                    cmd.Parameters.AddWithValue("@v2", pass);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    string us = "";
+                    string pas = "";
+                    while (reader.Read())
+                    {
+                        us = reader.GetString("UserName");
+                        pas = reader.GetString("password");
+                    }
+                    if (us != "" && pas != "")
+                    {
+                        MainWindow m1 = new MainWindow();
+                        this.Hide();
+                        m1.Show();
+                    }
+                    else
+                    {
+                        accError.Text = "Incorrect user name or password";
+                    }
+                    d1.con.Close();
+
                 }
-                if (us != "" && pas != "")
-                {
-                    MainWindow m1 = new MainWindow();
-                    this.Hide();
-                    m1.Show();
-                }
-                else
-                {
-                    accError.Text = "Incorrect user name or password";
-                }
-                d1.con.Close();
+                catch(Exception ex) { MessageBox.Show( ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
             }
         }
 
