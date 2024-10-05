@@ -116,7 +116,7 @@
                                         </StackPanel>
                                         <Button ToolTip="Having Trouble logging in?" Margin="0 8 0 0" Content="Help Me" Cursor="Help" Click="Button_Click_1"/>
                                        
-                                        <Button x:Name="btnexit" Content="Exit Application" Cursor="Hand" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" CommandTarget="{Binding ElementName=PermissionDialogHost}"/>
+                                        <Button Content="Exit Application" Cursor="Hand" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" CommandTarget="{Binding ElementName=PermissionDialogHost}"/>
                                     </StackPanel>
                                 </materialDesign:PopupBox>
 
