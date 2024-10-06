@@ -81,6 +81,7 @@
                                                  FontSize="15" 
                                                  materialDesign:HintAssist.Hint="Enter Username" 
                                                  BorderThickness="2" 
+                                                 TextChanged="txtusername_TextChanged" 
                                                  BorderBrush="{DynamicResource MaterialDesignDivider}" 
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}">
                                             <TextBox.Triggers>
@@ -89,7 +90,7 @@
                                                 </EventTrigger>
                                             </TextBox.Triggers>
                                         </TextBox>
-                                        <PasswordBox Margin="0 20 0 0" x:Name="txtpassword" Width="200" Height="55" FontSize="15" materialDesign:HintAssist.Hint="Enter Password" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedPasswordBox}">
+                                        <PasswordBox Margin="0 20 0 0" x:Name="txtpassword" Width="200" Height="55" FontSize="15" PasswordChanged="txtpassword_PasswordChanged" materialDesign:HintAssist.Hint="Enter Password" BorderThickness="2" BorderBrush="{DynamicResource MaterialDesignDivider}" Style="{StaticResource MaterialDesignOutlinedPasswordBox}">
                                             <PasswordBox.Triggers>
                                                 <EventTrigger RoutedEvent="PasswordBox.GotFocus">
                                                     <BeginStoryboard Storyboard="{StaticResource ShakeAnimation}"/>
@@ -116,7 +117,7 @@
                                         </StackPanel>
                                         <Button ToolTip="Having Trouble logging in?" Margin="0 8 0 0" Content="Help Me" Cursor="Help" Click="Button_Click_1"/>
                                        
-                                        <Button x:Name="btnexit" Content="Exit Application" Cursor="Hand" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" CommandTarget="{Binding ElementName=PermissionDialogHost}"/>
+                                        <Button Content="Exit Application" Cursor="Hand" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" CommandTarget="{Binding ElementName=PermissionDialogHost}"/>
                                     </StackPanel>
                                 </materialDesign:PopupBox>
 

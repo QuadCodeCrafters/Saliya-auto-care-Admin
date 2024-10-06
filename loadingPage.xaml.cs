@@ -42,11 +42,11 @@ namespace WPFModernVerticalMenu
         void bk_DoWork(object sender, EventArgs e)
         {
             //A Thread for Run the Loading
-            for (int i = 0; i <= 80; i++)
+            for (int i = 0; i <= 50; i++)
             {
 
                 (sender as BackgroundWorker).ReportProgress(i);
-                Thread.Sleep(80);
+                Thread.Sleep(50);
             }
         }
 
@@ -54,7 +54,7 @@ namespace WPFModernVerticalMenu
         {
 
             ProgressBar.Value = e.ProgressPercentage;
-            if (ProgressBar.Value == 80)
+            if (ProgressBar.Value == 50)
             {
                 Login_Page lP = new Login_Page(d1);
                 lP.Show();
