@@ -18,7 +18,7 @@ namespace WPFModernVerticalMenu
         {
             try
             {
-                string connString = "server=localhost;uid=root;pwd=raveen007;database=autocarebase";
+                string connString = "server=localhost;uid=root;pwd=yourpass;database=autocarebase";
                 con = new MySqlConnection();
                 con.ConnectionString = connString;
             }
